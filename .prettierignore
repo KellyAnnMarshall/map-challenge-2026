@@ -6,3 +6,4 @@ test-results
 package-lock.json
 SPECIFICATION.md
 map-challenge-2026.md
+public/data/scottish-lighthouses.geojson

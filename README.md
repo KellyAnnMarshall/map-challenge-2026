@@ -18,7 +18,11 @@ Vite prints the local development URL. Prompt pages use hash URLs such as `/#/da
 
 ## Mapbox token (optional)
 
-Copy `.env.example` to `.env.local` and set `VITE_MAPBOX_ACCESS_TOKEN` to a public Mapbox token (`pk…`). The token is compiled into the client bundle; never use a secret (`sk…`) token. Restrict the public token to the site origins in your Mapbox account. Without a token, the app shows an illustrated map preview instead.
+Copy `.env.example` to the untracked `.env.local` file and set `VITE_MAPBOX_ACCESS_TOKEN` to a public Mapbox token (`pk…`) for local development. The supplied local token is stored there and excluded from Git. The token is compiled into the browser bundle; Mapbox public tokens are not secrets, so restrict allowed origins in your Mapbox account and never use a secret (`sk…`) token. Without a token, the app keeps its prompt and feature list available and explains how to enable the map.
+
+For GitHub Pages, add a repository Actions secret named `MAPBOX_ACCESS_TOKEN`; the deployment workflow passes it to the build without storing it in the repository. The resulting public token is still visible to site visitors by design, so use Mapbox URL restrictions.
+
+Day 1 reads the committed `public/data/scottish-lighthouses.geojson` file locally, validates Point features, and preserves the source properties. The map and feature data are attributed to OpenStreetMap contributors and the ODbL.
 
 ## Checks and tests
 
@@ -61,11 +65,13 @@ For a root-domain host, use the default `npm run build` instead.
 
 ```text
 src/
-  challenges/day-01 … day-30/  Per-prompt implementation folders
+  challenges/day-01/          Lighthouse point-map experience and GeoJSON helpers
+  challenges/day-02 … day-30/  Per-prompt implementation folders
   components/                  Shared map and interface components
   data/                        Typed prompt calendar
   router/                      Home, 30 challenge routes and not-found route
   views/                       Home and reusable daily prompt pages
+public/data/                   Source GeoJSON dataset
 e2e/                           Playwright and axe-core browser tests
 ```
 

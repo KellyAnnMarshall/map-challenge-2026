@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import LighthouseExplorer from '../challenges/day-01/LighthouseExplorer.vue'
 import MapCanvas from '../components/MapCanvas.vue'
 import { challenges, getChallenge, getChallengeDate } from '../data/challenges'
 
@@ -13,7 +14,8 @@ const next = computed(() => challenges[Number(props.day)])
 <template>
   <article v-if="challenge" class="challenge-page">
     <RouterLink class="back-link" to="/#calendar"><span aria-hidden="true">←</span> ALL PROMPTS</RouterLink>
-    <div class="challenge-layout">
+    <LighthouseExplorer v-if="challenge.day === '01'" />
+    <div v-else class="challenge-layout">
       <section class="challenge-copy" aria-labelledby="challenge-title">
         <p class="eyebrow">
           <span class="eyebrow-dot"></span> FIELD GUIDE <span>·</span> {{ getChallengeDate(challenge.day) }}
